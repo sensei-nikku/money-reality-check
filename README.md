@@ -39,3 +39,8 @@ files with SRI in Chromium (Playwright). It covers the full student run, interim
 stale tabs, the Claim/Evidence/Reasoning gates, submit, the dashboard, send-back, script injection
 attempts on both pages, and the release gate failing closed. `MRC_FILES=releases/<id>` tests a frozen
 release instead of `beta/`; `SHOTS=<dir>` saves screenshots.
+
+## Releases
+| Id | What |
+|---|---|
+| `2026-11-19-v1` | First hybrid release: interim save, Go deeper links, Claim/Evidence/Reasoning, escaped dashboard, send back for rework. Needs the Nov 19 Code.gs. |

@@ -15,7 +15,7 @@
  * A missing or damaged pin makes the app show "not released" instead of loading
  * anything unchecked (fails closed).
  */
-var LIVE_RELEASE = null;   // <- the pin line goes here
+var LIVE_RELEASE = {"id":"2026-11-19-v1","sha":"8f350c06c2ac31634d085d24e8e96e8885c1de71","files":{"student.css":"sha384-MjYyWM2AY2nMPesQ3olGW8ZwRND6FnG9qyFIlN1OLQXfdFWLgr52TKCqZ2dWPZdY","student.js":"sha384-/3b0azgy+0/57B7mPXD5+RHUkzVEgRXjfJ2Zs1T9r0RDYcLPSHQHuPePfRUL31er","teacher.css":"sha384-FBni6sOoEM9Rx2XK1ALgan0FKPJDgptf47Pwq5K35/3WyfwhFwsSnEbGg++JVG2n","teacher.js":"sha384-5ZGT49fq/a4dpEDHBJJTTcsb8KIFD6IMCgaxFgWpCtVJJWYD53SJ9pmrVUygBGk1"}};
 
 var RELEASE_FILES = ['student.css', 'student.js', 'teacher.css', 'teacher.js'];
 
