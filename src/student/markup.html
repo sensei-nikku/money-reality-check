@@ -1,0 +1,275 @@
+<div id="loadScreen"><div class="spinner"></div><p style="font-size:14px;color:var(--dg)">Loading...</p><p id="loadErr" style="font-size:12px;color:var(--rd);display:none"></p></div>
+<div class="hdr" id="stickyHdr" style="display:none"><div class="wrap" style="padding-top:0;padding-bottom:0"><div class="hdr-row"><h1>Money Reality Check</h1><span class="badge" id="hBadge">1/7</span></div><div class="prog-track"><div class="prog-fill" id="hProg" style="width:0%"></div></div><div class="tabs" id="hTabs"></div></div></div>
+<div class="wrap" id="main">
+<div class="sec" id="secDone"><div style="text-align:center;margin:60px 0 20px"><h2 style="font-size:22px;font-weight:700;margin-bottom:8px">Already Submitted</h2><p style="font-size:13px;color:var(--dg)">Your work has been submitted for review.</p><p style="font-size:13px;color:var(--dg);margin-top:12px" id="doneEmail"></p></div></div>
+
+
+
+<!-- ═══ SECTION 0: PAYCHECK ═══ -->
+<div class="sec" id="s0">
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:12px">Section 1: Your Paycheck</h2>
+
+  <div class="block b-learn"><p class="bt">Learn</p>
+    <div class="sub"><p class="t">What Is Gross Pay?</p><p>Gross pay is the total amount your employer agrees to pay you before any deductions. If you make $16/hour and work 40 hours a week, your gross weekly pay is $640. Over a year (52 weeks), that is $33,280. This is the number on a job posting, but it is NOT the amount that shows up in your bank account.</p></div>
+    <div class="sub"><p class="t">What Is Net Pay?</p><p>Net pay (take-home pay) is what actually hits your bank account after all deductions. The gap between gross and net can be 20-35% of your paycheck. This is the only number that matters for budgeting because you cannot spend money you never received.</p></div>
+    <div class="sub"><p class="t">The Three Mandatory Deductions</p><p><strong>1. Federal Income Tax</strong> uses a progressive system: income is taxed in layers. The first $11,600 is taxed at 10%. Income from $11,601-$47,150 at 12%. And so on. Only dollars above each threshold get the higher rate.</p><p><strong>2. Arizona State Tax</strong> is a flat 2.5% on all earned income. Every dollar taxed at the same rate.</p><p><strong>3. FICA</strong> is 7.65% split between Social Security (6.2%) for retirement/disability and Medicare (1.45%) for health coverage at 65+. Your employer matches it.</p></div>
+  </div>
+
+  <div class="block b-apply"><p class="bt">Apply</p>
+    <div class="sub">
+      <div class="fld"><label>How are you paid?</label><div class="radio-g"><div class="rbtn sel" data-rkey="payType" data-rval="hourly" onclick="setRadio(this)">Hourly</div><div class="rbtn" data-rkey="payType" data-rval="salary" onclick="setRadio(this)">Salary</div></div></div>
+      <div id="pHourly"><div class="fld"><label>Hourly wage</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="wage" placeholder="16.50" step="0.25" oninput="calcPC()"></div></div><div class="fld"><label>Hours per week</label><input type="number" data-key="hours" value="40" placeholder="40" oninput="calcPC()"></div></div>
+      <div id="pSalary" style="display:none"><div class="fld"><label>Annual salary</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="salary" placeholder="38000" oninput="calcPC()"></div></div></div>
+    </div>
+    <div class="sub" id="pcR" style="display:none"><p class="t">Your Breakdown</p><div class="bk"><span>Gross monthly:</span><span class="r b" id="pcG">$0</span><span>- Federal tax:</span><span class="r rd" id="pcF">-$0</span><span>- AZ state:</span><span class="r rd" id="pcS">-$0</span><span>- FICA:</span><span class="r rd" id="pcC">-$0</span><span class="b bbt">Take-home:</span><span class="r b gn bbt" id="pcN" data-display="netMonthly">$0</span></div><div style="text-align:center;padding:10px 0"><p style="font-size:24px;font-weight:700;color:var(--gn)" id="pcNB">$0</p><p style="font-size:11px;color:var(--dg)" id="pcSB"></p></div></div>
+  </div>
+
+  <p class="lock-msg" id="lockMsg0">Enter your pay to unlock Think About It.</p>
+  <div class="locked" id="think0"><div class="block b-think"><p class="bt">Think About It</p><div class="sub">
+    <div class="kc-q"><label class="ql">Your gross pay and net pay are different. Explain why you should always use net pay when planning a budget. What happens if someone budgets with gross?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,0)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">FICA takes money from every paycheck. What two programs does it fund, and what would happen to workers and retirees if FICA did not exist?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,0)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">The U.S. uses progressive taxation. Explain what that means. If someone goes from $40k to $50k, is ALL their income taxed at a higher rate? Why or why not?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,0)"></textarea><p class="wc">0/30 words</p></div>
+  </div></div></div>
+
+  <div class="nav"><div></div><button class="btn btn-p" id="gate0" disabled onclick="goSec(1)">Next: Banking</button></div>
+  <p class="gate-msg" id="gateMsg0"></p><p class="save-ind"></p>
+</div>
+
+
+<!-- ═══ SECTION 1: BANKING ═══ -->
+<div class="sec" id="s1">
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:12px">Section 2: Banking</h2>
+
+  <div class="block b-learn"><p class="bt">Learn</p>
+    <div class="sub"><p class="t">Checking Accounts</p><p>Your everyday money hub. Paycheck lands here via direct deposit. You spend from it with a debit card or bill pay. Pays little to no interest (0.01% typical). The tradeoff: your money is always accessible but not growing.</p></div>
+    <div class="sub"><p class="t">Savings Accounts</p><p>Where you park money you do not need today. Online banks offer 4-5% APY. Traditional banks offer 0.01-0.50%. $1,000 in an online savings earns $40-50/year automatically. Some accounts limit withdrawals to 6/month.</p></div>
+    <div class="sub"><p class="t">FDIC Insurance</p><p>The FDIC insures deposits up to $250,000 per depositor per bank. If your bank fails, the government guarantees your money. Covers checking, savings, CDs, and money market accounts.</p></div>
+    <div class="sub"><p class="t">Banking Fees</p><p><strong>Overdraft ($35 each):</strong> Spending more than your balance. Three in a day = $105. Fix: opt OUT of overdraft protection.</p><p><strong>Monthly maintenance ($5-$15):</strong> $12/month = $144/year. Fix: direct deposit waiver or online bank.</p><p><strong>ATM fees ($3-$5):</strong> Using another bank's ATM. Twice a week = $300-500/year. Fix: use your own bank's ATMs.</p></div>
+    <div class="sub"><p class="t">Simple Interest Formula</p><p><strong>Interest = Principal x Rate x Time</strong></p><p>Example: $2,000 at 4.5% for 1 year = $2,000 x 0.045 x 1 = $90.</p></div>
+  </div>
+
+  <div class="block b-do"><p class="bt">Do It</p>
+    <div class="sub"><p class="t">Problem 1: Simple Interest</p><p>You deposit $500 earning 4.5% APY. Interest in one year?</p><div class="fld"><label>$500 x 0.045 x 1 = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="intCalc" placeholder="?" step="0.01" oninput="VN('intCalc',22.5,.1);checkDo(1);checkGate(1)"></div></div><p class="fb" id="fb_intCalc"></p></div>
+    <div class="sub"><p class="t">Problem 2: Fee Damage</p><p>3 overdrafts ($35 each) + 4 out-of-network ATMs ($5 each). Total?</p><div class="fld"><label>(3 x $35) + (4 x $5) = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="odCalc" placeholder="?" oninput="VN('odCalc',125,1);checkDo(1);checkGate(1)"></div></div><p class="fb" id="fb_odCalc"></p></div>
+    <div class="sub"><p class="t">Problem 3: Bank Comparison</p><p>Bank A: $12/month maintenance, no ATM fees. Bank B: $0 maintenance, 3 ATM trips/month at $5.</p><div class="fld"><label>Bank A yearly: $12 x 12 = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bankA" placeholder="?" oninput="VN('bankA',144,1);checkDo(1);checkGate(1)"></div></div><p class="fb" id="fb_bankA"></p><div class="fld"><label>Bank B yearly: 3 x $5 x 12 = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bankB" placeholder="?" oninput="VN('bankB',180,1);checkDo(1);checkGate(1)"></div></div><p class="fb" id="fb_bankB"></p></div>
+  </div>
+
+  <p class="lock-msg" id="lockMsg1">Get all three problems correct to unlock Think About It.</p>
+  <div class="locked" id="think1"><div class="block b-think"><p class="bt">Think About It</p><div class="sub">
+    <div class="kc-q"><label class="ql">Banking fees can cost hundreds per year. Name two fees you or someone you know has paid and explain exactly how to avoid each one.</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,1)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">Explain checking vs savings accounts. When should you use each? Why is it risky to keep all money in one account?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,1)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">What is FDIC insurance and why does it matter? What happens if a bank fails?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,1)"></textarea><p class="wc">0/30 words</p></div>
+  </div></div></div>
+
+  <div class="nav"><button class="btn btn-s" onclick="goSec(0)">Back</button><button class="btn btn-p" id="gate1" disabled onclick="goSec(2)">Next: Insurance</button></div>
+  <p class="gate-msg" id="gateMsg1"></p><p class="save-ind"></p>
+</div>
+
+
+<!-- ═══ SECTION 2: INSURANCE ═══ -->
+<div class="sec" id="s2">
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:12px">Section 3: Insurance</h2>
+
+  <div class="block b-learn"><p class="bt">Learn</p>
+    <div class="sub"><p class="t">Why Insurance Exists</p><p>Some costs are too large for one person. A car accident: $30,000. A hospital stay: $100,000. Insurance works through <strong>risk pooling</strong>: thousands pay small premiums into a shared pool. Most months, most people do not claim. The pool covers the few who do.</p></div>
+    <div class="sub"><p class="t">Key Terms</p><p><strong>Premium:</strong> Monthly payment whether or not you use it. <strong>Deductible:</strong> You pay first before insurance kicks in. <strong>Copay:</strong> Fixed amount per visit. <strong>Coinsurance:</strong> After deductible, you split costs (you 20%, insurer 80%). <strong>OOP Max:</strong> Most you pay in a year. After this, insurance covers 100%.</p></div>
+    <div class="sub"><p class="t">The Deductible Tradeoff</p><p>Higher deductible = lower premium but more risk. Lower deductible = higher premium but less risk. Choose based on your savings.</p></div>
+  </div>
+
+  <div class="block b-apply"><p class="bt">Apply</p>
+    <div class="sub"><p class="t">Auto Insurance: Pick a Plan</p>
+      <div class="scenario" data-rkey="autoChoice" data-rval="planA" onclick="pickScen(this)"><p class="ti">Plan A: $500 deductible, $180/month</p><p class="su">No accident: $2,160/yr. $3,000 repair: $2,660/yr total.</p></div>
+      <div class="scenario" data-rkey="autoChoice" data-rval="planB" onclick="pickScen(this)"><p class="ti">Plan B: $1,500 deductible, $120/month</p><p class="su">No accident: $1,440/yr. $3,000 repair: $2,940/yr total.</p></div>
+    </div>
+  </div>
+
+  <div class="block b-do"><p class="bt">Do It</p>
+    <div class="sub"><p class="t">Health Insurance Math</p><p>Your plan: $1,500 deductible, 20% coinsurance, $6,000 OOP max. ER bill: $8,000.</p>
+      <div class="fld"><label>Step 1: Deductible = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="h1" placeholder="?" oninput="VN('h1',1500,1);checkDo(2);checkGate(2)"></div></div><p class="fb" id="fb_h1"></p>
+      <div class="fld"><label>Step 2: Remaining ($8,000 - deductible) = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="h2" placeholder="?" oninput="VN('h2',6500,1);checkDo(2);checkGate(2)"></div></div><p class="fb" id="fb_h2"></p>
+      <div class="fld"><label>Step 3: Your 20% of remaining = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="h3" placeholder="?" oninput="VN('h3',1300,1);checkDo(2);checkGate(2)"></div></div><p class="fb" id="fb_h3"></p>
+      <div class="fld"><label>Step 4: Total out-of-pocket = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="h4" placeholder="?" data-display="healthCalc" oninput="VN('h4',2800,1);checkDo(2);checkGate(2)"></div></div><p class="fb" id="fb_h4"></p>
+    </div>
+    <div class="sub"><p class="t">Breakeven</p><p>Plan B saves $60/month. Deductible is $1,000 higher. How many months to break even?</p><p style="font-size:11px;color:var(--dg)">$1,000 / $60 = ? (round up)</p><div class="fld"><label>Months = ____</label><input type="number" data-key="brkEven" placeholder="?" oninput="VN('brkEven',17,1);checkDo(2);checkGate(2)"></div><p class="fb" id="fb_brkEven"></p></div>
+  </div>
+
+  <p class="lock-msg" id="lockMsg2">Complete all calculations and pick a plan to unlock Think About It.</p>
+  <div class="locked" id="think2"><div class="block b-think"><p class="bt">Think About It</p><div class="sub">
+    <div class="kc-q"><label class="ql">Explain risk pooling in your own words. Why does an insurance company not go bankrupt paying claims?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,2)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">You chose an auto plan and calculated the breakeven. Explain your choice. What would need to be true about your finances for the other plan to be smarter?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,2)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">Why is the out-of-pocket maximum the most important number in a health plan?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,2)"></textarea><p class="wc">0/30 words</p></div>
+  </div></div></div>
+
+  <div class="nav"><button class="btn btn-s" onclick="goSec(1)">Back</button><button class="btn btn-p" id="gate2" disabled onclick="goSec(3)">Next: Credit</button></div>
+  <p class="gate-msg" id="gateMsg2"></p><p class="save-ind"></p>
+</div>
+
+
+<!-- ═══ SECTION 3: CREDIT ═══ -->
+<div class="sec" id="s3">
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:12px">Section 4: Credit Cards</h2>
+
+  <div class="block b-learn"><p class="bt">Learn</p>
+    <div class="sub"><p class="t">How Credit Cards Work</p><p>Pay the <strong>full balance</strong> by due date = zero interest (grace period). Carry a balance = interest at <strong>APR</strong> (20-30% typical).</p></div>
+    <div class="sub"><p class="t">The Minimum Payment Trap</p><p>Minimum (about 2% or $25) is set low on purpose. Most goes to interest, not balance. $2,000 at 25% APR takes 10+ years at minimums.</p></div>
+    <div class="sub"><p class="t">Credit Score (300-850)</p><p><strong>1. Payment history (35%):</strong> Pay on time.</p><p><strong>2. Utilization (30%):</strong> Keep under 30% of limit.</p><p><strong>3. Length (15%):</strong> Longer = better.</p><p><strong>4. Mix (10%):</strong> Different types help.</p><p><strong>5. Inquiries (10%):</strong> Many apps = risky.</p></div>
+  </div>
+
+  <div class="block b-apply"><p class="bt">Apply</p>
+    <div class="sub"><p class="t">Payoff Calculator</p>
+      <div class="fld"><label>Balance</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="ccBal" placeholder="2000" oninput="calcCC()"></div></div>
+      <div class="fld"><label>APR (%)</label><div class="fld-row"><span class="fld-pfx">%</span><input type="number" data-key="ccAPR" value="24.99" step="0.01" oninput="calcCC()"></div></div>
+    </div>
+    <div class="sub" id="ccR" style="display:none"><p class="t" style="color:var(--rd)">Results</p>
+      <div class="pf-card" style="background:#FFEBEE"><p class="ti" style="color:var(--rd)" id="ccML"></p><div class="pf-grid"><span>Time:</span><span class="r" id="ccMT"></span><span>Total:</span><span class="r" style="color:var(--rd)" id="ccMO"></span><span>Interest:</span><span class="r" style="color:var(--rd)" id="ccMI"></span></div></div>
+      <div class="pf-card" style="background:var(--ol)"><p class="ti" style="color:var(--or)" id="ccEL"></p><div class="pf-grid"><span>Time:</span><span class="r" id="ccET"></span><span>Total:</span><span class="r" id="ccEO"></span><span>Saved:</span><span class="r" style="color:var(--gn)" id="ccES"></span></div></div>
+      <div class="pf-card" style="background:#E8F5E9"><p class="ti" style="color:var(--gn)" id="ccAL"></p><div class="pf-grid"><span>Time:</span><span class="r" id="ccAT"></span><span>Total:</span><span class="r" id="ccAO"></span><span>Saved:</span><span class="r" style="color:var(--gn)" id="ccAS"></span></div></div>
+      <p id="ccSL" style="margin-top:8px;padding:8px;border-radius:6px;background:#f5f5f5;text-align:center;font-size:12px"></p>
+    </div>
+  </div>
+
+  <div class="block b-do"><p class="bt">Do It</p>
+    <div class="sub"><p class="t">See the Trap</p><p>You owe $1,000 at 24% APR. Minimum = $25.</p>
+      <div class="fld"><label>Monthly interest: $1,000 x 0.24 / 12 = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="ccInt1" placeholder="?" oninput="VN('ccInt1',20,1);checkDo(3);checkGate(3)"></div></div><p class="fb" id="fb_ccInt1"></p>
+      <div class="fld"><label>Toward balance: $25 - interest = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="ccPrin1" placeholder="?" oninput="VN('ccPrin1',5,.5);checkDo(3);checkGate(3)"></div></div><p class="fb" id="fb_ccPrin1"></p>
+      <p style="font-size:12px;color:var(--dg);margin-top:8px">Only $5 of your $25 reduces the debt. The rest is profit for the card company.</p>
+    </div>
+  </div>
+
+  <p class="lock-msg" id="lockMsg3">Complete the calculations to unlock Think About It.</p>
+  <div class="locked" id="think3"><div class="block b-think"><p class="bt">Think About It</p><div class="sub">
+    <div class="kc-q"><label class="ql">You calculated that only $5 of a $25 payment goes to your balance. Explain why minimum payments keep people in debt for years.</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,3)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">List the five credit score factors in order. Which two make up 65%, and what actions improve them?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,3)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">What is the grace period, and how does it let you avoid interest? Why do most people end up paying interest anyway?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,3)"></textarea><p class="wc">0/30 words</p></div>
+  </div></div></div>
+
+  <div class="nav"><button class="btn btn-s" onclick="goSec(2)">Back</button><button class="btn btn-p" id="gate3" disabled onclick="goSec(4)">Next: Loans</button></div>
+  <p class="gate-msg" id="gateMsg3"></p><p class="save-ind"></p>
+</div>
+
+
+<!-- ═══ SECTION 4: LOANS ═══ -->
+<div class="sec" id="s4">
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:12px">Section 5: Loans and Debt</h2>
+
+  <div class="block b-learn"><p class="bt">Learn</p>
+    <div class="sub"><p class="t">Loan Terms</p><p><strong>Principal:</strong> Amount borrowed. <strong>APR:</strong> Annual cost. <strong>Term:</strong> Repayment length. Longer term = lower payment but more total interest. The car costs the same either way.</p></div>
+    <div class="sub"><p class="t">Avalanche vs Snowball</p><p><strong>Avalanche:</strong> Extra to highest APR first. Saves the most. <strong>Snowball:</strong> Extra to smallest balance first. Faster wins. Both work.</p></div>
+    <div class="sub"><p class="t">Identity Theft</p><p>Check your credit report yearly (annualcreditreport.com). Freeze credit at all three bureaus (free). Use unique passwords + two-factor auth. Never share SSN unless required.</p></div>
+  </div>
+
+  <div class="block b-apply"><p class="bt">Apply</p>
+    <div class="sub"><p class="t">Auto Loan Comparison</p>
+      <div class="fld"><label>Car price</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="carPrice" value="18000" oninput="calcLN()"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+        <div style="padding:10px;border-radius:8px;background:var(--tl)"><p style="font-size:12px;font-weight:700;color:var(--teal);margin-bottom:6px">Loan A: 48mo</p><div class="fld"><label>APR</label><input type="number" data-key="lnA" value="6.5" step="0.1" oninput="calcLN()"></div><p style="font-size:12px">Pmt: <strong id="lA">$0</strong></p><p style="font-size:12px">Total: <strong id="lAT">$0</strong></p><p style="font-size:12px">Interest: <strong id="lAI" style="color:var(--rd)">$0</strong></p></div>
+        <div style="padding:10px;border-radius:8px;background:var(--ol)"><p style="font-size:12px;font-weight:700;color:var(--or);margin-bottom:6px">Loan B: 72mo</p><div class="fld"><label>APR</label><input type="number" data-key="lnB" value="8.0" step="0.1" oninput="calcLN()"></div><p style="font-size:12px">Pmt: <strong id="lB">$0</strong></p><p style="font-size:12px">Total: <strong id="lBT">$0</strong></p><p style="font-size:12px">Interest: <strong id="lBI" style="color:var(--rd)">$0</strong></p></div>
+      </div>
+      <p style="font-size:11px;color:var(--dg);margin-top:8px" id="lnD"></p>
+    </div>
+  </div>
+
+  <div class="block b-do"><p class="bt">Do It</p>
+    <div class="sub"><p class="t">Check the Calculator</p><p>Loan A: $427/month for 48 months.</p>
+      <div class="fld"><label>Total: $427 x 48 = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="lnTotal" placeholder="?" oninput="VN('lnTotal',20496,50);checkDo(4);checkGate(4)"></div></div><p class="fb" id="fb_lnTotal"></p>
+      <div class="fld"><label>Interest: total - $18,000 = $____</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="lnInt" placeholder="?" oninput="VN('lnInt',2496,50);checkDo(4);checkGate(4)"></div></div><p class="fb" id="fb_lnInt"></p>
+    </div>
+  </div>
+
+  <p class="lock-msg" id="lockMsg4">Complete the calculations to unlock Think About It.</p>
+  <div class="locked" id="think4"><div class="block b-think"><p class="bt">Think About It</p><div class="sub">
+    <div class="kc-q"><label class="ql">Why might someone choose the shorter, higher-payment loan? What is the real cost of affordable monthly payments?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,4)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">Three debts: Card A ($800, 28% APR), Card B ($3,200, 19%), Card C ($400, 22%). $100 extra/month. Which card under avalanche? Snowball? Explain both.</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,4)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">Name two things you can do now to protect against identity theft. Explain how each works.</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,4)"></textarea><p class="wc">0/30 words</p></div>
+  </div></div></div>
+
+  <div class="nav"><button class="btn btn-s" onclick="goSec(3)">Back</button><button class="btn btn-p" id="gate4" disabled onclick="goSec(5)">Next: Budget</button></div>
+  <p class="gate-msg" id="gateMsg4"></p><p class="save-ind"></p>
+</div>
+
+
+<!-- ═══ SECTION 5: BUDGET ═══ -->
+<div class="sec" id="s5">
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:12px">Section 6: Your Budget</h2>
+  <p style="font-size:13px;color:var(--dg);margin-bottom:12px">Take-home: <strong style="color:var(--gn)" id="bgNet">$0/mo</strong></p>
+
+  <div class="block b-learn"><p class="bt">Learn</p>
+    <div class="sub"><p class="t">The 50/30/20 Rule</p><p><strong>50% needs</strong> (rent, groceries, insurance, transport, minimum debt). <strong>30% wants</strong> (eating out, subs, entertainment). <strong>20% savings + extra debt payoff</strong>.</p></div>
+    <div class="sub"><p class="t">Needs vs Wants</p><p>Needs cannot be eliminated without serious consequences. Wants are everything else. A phone is a need; a $60 unlimited plan might be a want if $25 prepaid works.</p></div>
+    <div class="sub"><p class="t">When It Does Not Balance</p><p>Cut wants first. Then reduce needs. Last resort: more income. An unbalanced budget is information, not failure.</p></div>
+  </div>
+
+  <div class="block b-apply"><p class="bt">Apply</p>
+    <div class="sub"><p class="t">Needs</p>
+      <div class="fld"><label>Rent/Housing</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bRent" placeholder="1200" oninput="calcBG()"></div></div>
+      <div class="fld"><label>Transportation</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bTrans" placeholder="300" oninput="calcBG()"></div></div>
+      <div class="fld"><label>Groceries</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bGroc" placeholder="350" oninput="calcBG()"></div></div>
+      <div class="fld"><label>Phone</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bPhone" placeholder="60" oninput="calcBG()"></div></div>
+      <div class="fld"><label>Insurance</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bIns" placeholder="150" oninput="calcBG()"></div></div>
+      <div class="fld"><label>Min debt payments</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bDebt" placeholder="0" oninput="calcBG()"></div></div>
+    </div>
+    <div class="sub"><p class="t" style="color:var(--or)">Wants</p>
+      <div class="fld"><label>Eating out/delivery</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bEat" placeholder="150" oninput="calcBG()"></div></div>
+      <div class="fld"><label>Subscriptions</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bSubs" placeholder="50" oninput="calcBG()"></div></div>
+      <div class="fld"><label>Entertainment</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bEnt" placeholder="75" oninput="calcBG()"></div></div>
+      <div class="fld"><label>Other</label><div class="fld-row"><span class="fld-pfx">$</span><input type="number" data-key="bOther" placeholder="50" oninput="calcBG()"></div></div>
+    </div>
+    <div class="sub" id="bgR" style="display:none"><p class="t">Breakdown</p>
+      <div class="stats-3"><div class="st" style="background:var(--tl)"><p class="sl2">Needs</p><p class="sv" style="color:var(--teal)" id="bgN">$0</p><p class="ss" id="bgNP"></p></div><div class="st" style="background:var(--ol)"><p class="sl2">Wants</p><p class="sv" style="color:var(--or)" id="bgW">$0</p><p class="ss" id="bgWP"></p></div><div class="st" id="bgRC"><p class="sl2">Left</p><p class="sv" id="bgRM">$0</p><p class="ss" id="bgRS"></p></div></div>
+      <div id="bgBR"></div>
+      <div id="bgOV" class="warn" style="display:none"></div>
+      <div style="padding:10px;border-radius:6px;background:#f5f5f5;font-size:12px;margin-top:8px"><p style="font-weight:700;margin-bottom:3px">50/30/20:</p><p class="chk-row" id="bgC1"></p><p class="chk-row" id="bgC2"></p><p class="chk-row" id="bgC3"></p></div>
+    </div>
+  </div>
+
+  <div class="block b-do"><p class="bt">Do It</p>
+    <div class="sub"><p class="t">Need or Want?</p><p style="margin-bottom:8px">Classify each expense.</p>
+      <div class="nw-row"><span class="nw-label">Rent</span><div class="radio-g"><div class="rbtn" data-rkey="nw_rent" data-rval="need" onclick="setRadio(this);checkNWfb()">Need</div><div class="rbtn" data-rkey="nw_rent" data-rval="want" onclick="setRadio(this);checkNWfb()">Want</div></div></div>
+      <div class="nw-row"><span class="nw-label">Netflix</span><div class="radio-g"><div class="rbtn" data-rkey="nw_netflix" data-rval="need" onclick="setRadio(this);checkNWfb()">Need</div><div class="rbtn" data-rkey="nw_netflix" data-rval="want" onclick="setRadio(this);checkNWfb()">Want</div></div></div>
+      <div class="nw-row"><span class="nw-label">Gas for commute</span><div class="radio-g"><div class="rbtn" data-rkey="nw_gas" data-rval="need" onclick="setRadio(this);checkNWfb()">Need</div><div class="rbtn" data-rkey="nw_gas" data-rval="want" onclick="setRadio(this);checkNWfb()">Want</div></div></div>
+      <div class="nw-row"><span class="nw-label">Concert tickets</span><div class="radio-g"><div class="rbtn" data-rkey="nw_concert" data-rval="need" onclick="setRadio(this);checkNWfb()">Need</div><div class="rbtn" data-rkey="nw_concert" data-rval="want" onclick="setRadio(this);checkNWfb()">Want</div></div></div>
+      <div class="nw-row"><span class="nw-label">Groceries</span><div class="radio-g"><div class="rbtn" data-rkey="nw_groceries" data-rval="need" onclick="setRadio(this);checkNWfb()">Need</div><div class="rbtn" data-rkey="nw_groceries" data-rval="want" onclick="setRadio(this);checkNWfb()">Want</div></div></div>
+      <div class="nw-row"><span class="nw-label">Gym membership</span><div class="radio-g"><div class="rbtn" data-rkey="nw_gym" data-rval="need" onclick="setRadio(this);checkNWfb()">Need</div><div class="rbtn" data-rkey="nw_gym" data-rval="want" onclick="setRadio(this);checkNWfb()">Want</div></div></div>
+      <div class="nw-row"><span class="nw-label">Electric bill</span><div class="radio-g"><div class="rbtn" data-rkey="nw_electric" data-rval="need" onclick="setRadio(this);checkNWfb()">Need</div><div class="rbtn" data-rkey="nw_electric" data-rval="want" onclick="setRadio(this);checkNWfb()">Want</div></div></div>
+      <div class="nw-row"><span class="nw-label">Daily coffee shop</span><div class="radio-g"><div class="rbtn" data-rkey="nw_coffee" data-rval="need" onclick="setRadio(this);checkNWfb()">Need</div><div class="rbtn" data-rkey="nw_coffee" data-rval="want" onclick="setRadio(this);checkNWfb()">Want</div></div></div>
+      <div class="nw-row"><span class="nw-label">Car insurance</span><div class="radio-g"><div class="rbtn" data-rkey="nw_insurance" data-rval="need" onclick="setRadio(this);checkNWfb()">Need</div><div class="rbtn" data-rkey="nw_insurance" data-rval="want" onclick="setRadio(this);checkNWfb()">Want</div></div></div>
+      <div class="nw-row"><span class="nw-label">Salon haircut</span><div class="radio-g"><div class="rbtn" data-rkey="nw_haircut" data-rval="need" onclick="setRadio(this);checkNWfb()">Need</div><div class="rbtn" data-rkey="nw_haircut" data-rval="want" onclick="setRadio(this);checkNWfb()">Want</div></div></div>
+    </div>
+  </div>
+
+  <p class="lock-msg" id="lockMsg5">Enter budget and classify all items correctly to unlock Think About It.</p>
+  <div class="locked" id="think5"><div class="block b-think"><p class="bt">Think About It</p><div class="sub">
+    <div class="kc-q"><label class="ql">If you had to cut $200/month, what would you cut and why? What is the tradeoff?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,5)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">What is an emergency fund? How many months should it cover? Based on your budget, what would 3 months be?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,5)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">Name one budgeting strategy besides 50/30/20 (zero-based, envelope, pay-yourself-first). How does it work? Why prefer it?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,5)"></textarea><p class="wc">0/30 words</p></div>
+  </div></div></div>
+
+  <div class="nav"><button class="btn btn-s" onclick="goSec(4)">Back</button><button class="btn btn-p" id="gate5" disabled onclick="goSec(6)">Next: Reflection</button></div>
+  <p class="gate-msg" id="gateMsg5"></p><p class="save-ind"></p>
+</div>
+
+
+<!-- ═══ SECTION 6: REFLECTION ═══ -->
+<div class="sec" id="s6">
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:12px">Section 7: Final Reflection</h2>
+
+  <div class="block b-think" id="think6"><p class="bt">Think About It</p><div class="sub">
+    <div class="kc-q"><label class="ql">Across all six sections, what was the most surprising thing you learned about your financial situation? Why?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,6)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">Name one specific financial decision you will make differently. Be concrete: I will [action] because [reason from your calculations].</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,6)"></textarea><p class="wc">0/30 words</p></div>
+    <div class="kc-q"><label class="ql">One piece of financial advice for someone starting their first job, based on what you learned here?</label><textarea rows="4" placeholder="Write at least 30 words..." oninput="onTA(this,6)"></textarea><p class="wc">0/30 words</p></div>
+  </div></div>
+
+  <div class="nav"><button class="btn btn-s" onclick="goSec(5)">Back</button><button class="btn btn-p" id="gate6" disabled onclick="goSec(7)" style="background:var(--gn);border-color:var(--gn)">Review and Submit</button></div>
+  <p class="gate-msg" id="gateMsg6"></p><p class="save-ind"></p>
+</div>
+
+
+<!-- ═══ SUMMARY (dynamic) ═══ -->
+<div class="sec" id="sSummary">
+  <div id="sumContent"></div>
+</div>
+
+</div>
+<div class="footer no-print">Money Reality Check - The Excel Center - <a href="#" id="dashLink" style="color:#ccc">Dashboard</a></div>
+
+

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <style>
+    body { margin: 0; background: #FAFAF7; color: #1A1A2E; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .mrc-boot { max-width: 520px; margin: 80px auto; padding: 24px; text-align: center; color: #555; line-height: 1.5; }
+    .mrc-bootfail { background: #FFEBEE; border: 1px solid #E57373; color: #B71C1C; border-radius: 10px; padding: 16px 18px; text-align: left; }
+  </style>
+</head>
+<body>
+  <div id="app"><div class="mrc-boot">Loading <b>Money Reality Check</b>&hellip;</div></div>
+
+  <!-- Built on the server: who you are, your saved work, and the release a teacher approved. -->
+  <script>window.MRC_BOOT = <?!= BOOT ?>;</script>
+  <script>window.MRC_RELEASE = <?!= mrcRelease() ?>;</script>
+
+  <script>
+  /* Money Reality Check — Apps Script shell (Index.html). Pasted once.
+   *
+   * Everyone runs only the release pinned in Release.gs:
+   *   - files come from releases/<id>/ on GitHub Pages, or jsDelivr at the exact
+   *     commit as a backup;
+   *   - each file carries its SHA-384 hash, and the browser refuses to run a file
+   *     whose bytes don't match (Subresource Integrity). Fonts are inside the CSS,
+   *     so its hash covers them; nothing else is fetched.
+   * A push to GitHub changes nothing. A new pin reaches /dev when Release.gs is
+   * pasted, and students only when a new deployment version is made.
+   */
+  (function () {
+    var PAGES = 'https://sensei-nikku.github.io/money-reality-check/';
+    var CDN   = 'https://cdn.jsdelivr.net/gh/sensei-nikku/money-reality-check@';
+    var BOOT  = window.MRC_BOOT || {};
+    var REL   = window.MRC_RELEASE;
+    var page  = BOOT.page === 'teacher' ? 'teacher' : 'student';
+    var CSS = page + '.css', JS = page + '.js';
+
+    function fail(msg) {
+      document.getElementById('app').innerHTML =
+        '<div class="mrc-boot"><div class="mrc-bootfail"><b>Money Reality Check couldn\'t load.</b><br>' + msg + '</div></div>';
+    }
+    var DOWN = 'Refresh the page and try again. If it still won\'t load, it\'s down for now &mdash; ' +
+               'let your teacher know. Your saved work is safe.';
+
+    function el(tag, url, hash) {
+      var e = document.createElement(tag);
+      if (tag === 'link') { e.rel = 'stylesheet'; e.href = url; } else { e.src = url; }
+      e.integrity = hash; e.crossOrigin = 'anonymous';
+      return e;
+    }
+    // CSS, then the script, from one source; any failure (404, network, hash mismatch) -> onFail.
+    function loadFrom(root, onFail) {
+      var css = el('link', root + CSS, REL.files[CSS]), done = false;
+      css.onload = function () { if (!done) { done = true; script(); } };
+      css.onerror = function () { if (!done) { done = true; css.remove(); onFail(); } };
+      setTimeout(function () { if (!done) { done = true; script(); } }, 6000);   // slow CSS: go on (it stays hash-checked)
+      document.head.appendChild(css);
+      function script() {
+        var s = el('script', root + JS, REL.files[JS]);
+        s.onerror = function () { s.remove(); onFail(); };
+        document.body.appendChild(s);
+      }
+    }
+
+    if (!REL || !REL.files) {
+      fail('This version hasn\'t been released yet. (Teacher: Release.gs is missing or its pin is damaged.)');
+      return;
+    }
+    var roots = [PAGES + 'releases/' + REL.id + '/', CDN + REL.sha + '/releases/' + REL.id + '/'];
+    var i = 0;
+    (function tryNext() {
+      if (i >= roots.length) { fail(DOWN); return; }
+      loadFrom(roots[i++], tryNext);
+    })();
+  })();
+  </script>
+</body>
+</html>

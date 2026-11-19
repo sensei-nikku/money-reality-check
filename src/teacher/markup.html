@@ -1,0 +1,35 @@
+<div class="wrap">
+  <h1>💰 Money Reality Check</h1>
+  <p class="sub">Teacher Dashboard</p>
+
+  <div id="listView">
+    <div class="toolbar no-print">
+      <button class="btn btn-s btn-sm" onclick="loadStudents()">↻ Refresh</button>
+      <a href="#" id="studentViewLink" target="_blank" class="btn btn-s btn-sm" style="text-decoration:none">👁 Student View</a>
+      <select id="filterStatus" onchange="renderTable()">
+        <option value="all">All</option>
+        <option value="new">Unused</option>
+        <option value="active">In progress</option>
+        <option value="submitted">Submitted</option>
+      </select>
+      <span class="count" id="countLabel"></span>
+    </div>
+    <div id="spinner">Loading students...</div>
+    <table style="display:none" id="tbl">
+      <thead><tr><th>Student</th><th>Status</th><th>Section</th><th>Last Active</th><th>Submitted</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div id="viewer">
+    <div class="viewer-hdr no-print">
+      <button class="btn btn-s btn-sm" onclick="closeViewer()">← Back</button>
+      <div>
+        <span id="viewerEmail" style="font-weight:700;color:var(--teal);margin-right:12px;font-size:14px"></span>
+        <button class="btn btn-s btn-sm" onclick="window.print()">🖨️ Print</button>
+      </div>
+    </div>
+    <div id="viewerContent"></div>
+  </div>
+</div>
+
